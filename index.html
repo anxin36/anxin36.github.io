@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的个人主页 | 开发者</title>
+    <title>关于我 | 个人主页</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -17,410 +17,229 @@
             --primary-color: #3498db;
             --secondary-color: #2c3e50;
             --accent-color: #e74c3c;
-            --light-color: #ecf0f1;
-            --dark-color: #34495e;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
             --text-color: #333;
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
+            --border-radius: 10px;
         }
         
         body {
             background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
             color: var(--text-color);
             line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
         }
         
         .container {
-            width: 90%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 20px;
         }
         
-        /* 导航栏样式 */
+        /* 头部样式 */
         header {
-            background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: var(--shadow);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            padding: 20px 0;
-            transition: var(--transition);
-        }
-        
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
         }
         
         .logo {
-            font-size: 1.8rem;
+            font-size: 2.5rem;
             font-weight: 700;
             color: var(--primary-color);
+            margin-bottom: 10px;
         }
         
-        .logo span {
-            color: var(--secondary-color);
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-        
-        .nav-links li {
-            margin-left: 30px;
-        }
-        
-        .nav-links a {
-            text-decoration: none;
+        .tagline {
+            font-size: 1.2rem;
             color: var(--dark-color);
-            font-weight: 600;
-            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* 主内容区 */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        /* 关于我卡片 */
+        .about-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
             transition: var(--transition);
-            position: relative;
         }
         
-        .nav-links a:hover {
-            color: var(--primary-color);
+        @media (min-width: 768px) {
+            .about-card {
+                flex-direction: row;
+            }
         }
         
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary-color);
-            transition: var(--transition);
+        .about-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
         
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        
-        .menu-toggle {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        
-        /* 主区域样式 */
-        .hero {
-            height: 100vh;
+        .about-img {
+            flex: 1;
+            min-height: 300px;
+            background: linear-gradient(135deg, var(--primary-color), #1a73e8);
             display: flex;
             align-items: center;
-            padding-top: 80px;
-            background: linear-gradient(to right, rgba(52, 152, 219, 0.1), rgba(236, 240, 241, 0.8)), url('https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80') center/cover no-repeat;
-        }
-        
-        .hero-content {
-            max-width: 600px;
-        }
-        
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            color: var(--secondary-color);
-            line-height: 1.2;
-        }
-        
-        .hero h1 span {
-            color: var(--primary-color);
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            color: var(--dark-color);
-        }
-        
-        .btn {
-            display: inline-block;
-            background: var(--primary-color);
-            color: white;
-            padding: 12px 28px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-            border: 2px solid var(--primary-color);
-            cursor: pointer;
-        }
-        
-        .btn:hover {
-            background: transparent;
-            color: var(--primary-color);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.2);
-        }
-        
-        .btn-outline {
-            background: transparent;
-            color: var(--primary-color);
-            margin-left: 15px;
-        }
-        
-        .btn-outline:hover {
-            background: var(--primary-color);
-            color: white;
-        }
-        
-        /* 关于区域样式 */
-        section {
-            padding: 100px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--secondary-color);
+            justify-content: center;
             position: relative;
-            display: inline-block;
+            overflow: hidden;
+        }
+        
+        .about-img-content {
+            text-align: center;
+            padding: 30px;
+            color: white;
+            z-index: 2;
+        }
+        
+        .about-img-content img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 20px;
+        }
+        
+        .about-img-content h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .about-img-content .title {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .about-text {
+            flex: 1.5;
+            padding: 40px;
+        }
+        
+        .about-text h2 {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            margin-bottom: 25px;
+            position: relative;
             padding-bottom: 15px;
         }
         
-        .section-title h2::after {
+        .about-text h2::after {
             content: '';
             position: absolute;
             bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
+            left: 0;
+            width: 60px;
             height: 4px;
             background: var(--primary-color);
             border-radius: 2px;
         }
         
-        .about-content {
-            display: flex;
-            align-items: center;
-            gap: 50px;
-        }
-        
-        .about-img {
-            flex: 1;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-        
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: var(--transition);
-        }
-        
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-        
-        .about-text {
-            flex: 1;
-        }
-        
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: var(--secondary-color);
-        }
-        
         .about-text p {
             margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.8;
         }
         
-        /* 技能区域样式 */
-        .skills {
-            background-color: var(--light-color);
-        }
-        
-        .skills-container {
+        /* 详细信息部分 */
+        .details-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
+            margin-top: 40px;
         }
         
-        .skill-card {
+        .detail-card {
             background: white;
-            border-radius: 15px;
+            border-radius: var(--border-radius);
             padding: 30px;
             box-shadow: var(--shadow);
             transition: var(--transition);
-            text-align: center;
         }
         
-        .skill-card:hover {
-            transform: translateY(-10px);
+        .detail-card:hover {
+            transform: translateY(-5px);
         }
         
-        .skill-card i {
-            font-size: 3rem;
+        .detail-card h3 {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .detail-card h3 i {
             color: var(--primary-color);
-            margin-bottom: 20px;
+            font-size: 1.8rem;
         }
         
-        .skill-card h3 {
-            font-size: 1.5rem;
+        .detail-item {
             margin-bottom: 15px;
-            color: var(--secondary-color);
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
         }
         
-        /* 项目区域样式 */
-        .projects-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 40px;
+        .detail-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
         }
         
-        .project-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-        
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-        
-        .project-img {
-            height: 250px;
-            overflow: hidden;
-        }
-        
-        .project-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-        
-        .project-card:hover .project-img img {
-            transform: scale(1.1);
-        }
-        
-        .project-info {
-            padding: 25px;
-        }
-        
-        .project-info h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: var(--secondary-color);
-        }
-        
-        .project-info p {
-            margin-bottom: 20px;
+        .detail-item h4 {
+            font-size: 1.1rem;
             color: var(--dark-color);
+            margin-bottom: 5px;
         }
         
-        .project-tags {
+        .detail-item p {
+            font-size: 1rem;
+            color: #666;
+        }
+        
+        /* 兴趣部分 */
+        .interests {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 15px;
+            margin-top: 10px;
         }
         
-        .tag {
-            background: var(--light-color);
+        .interest {
+            background: rgba(52, 152, 219, 0.1);
             color: var(--primary-color);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 0.95rem;
             font-weight: 600;
         }
         
-        /* 联系区域样式 */
-        .contact {
-            background: linear-gradient(to bottom right, #2c3e50, #1a2530);
-            color: white;
-        }
-        
-        .contact .section-title h2 {
-            color: white;
-        }
-        
-        .contact-container {
-            display: flex;
-            gap: 50px;
-        }
-        
-        .contact-info {
-            flex: 1;
-        }
-        
-        .contact-info h3 {
-            font-size: 1.8rem;
-            margin-bottom: 30px;
-        }
-        
-        .contact-detail {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 30px;
-        }
-        
-        .contact-detail i {
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            margin-right: 20px;
-            margin-top: 5px;
-        }
-        
-        .contact-form {
-            flex: 1;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 40px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-        }
-        
-        .form-group {
-            margin-bottom: 25px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 8px;
-            color: white;
-            font-size: 1rem;
-        }
-        
-        .form-control:focus {
-            outline: 2px solid var(--primary-color);
-            background: rgba(255, 255, 255, 0.2);
-        }
-        
-        textarea.form-control {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
-        /* 页脚样式 */
+        /* 页脚 */
         footer {
-            background: var(--secondary-color);
-            color: white;
-            padding: 40px 0;
             text-align: center;
+            padding: 40px 0;
+            margin-top: 60px;
+            color: var(--dark-color);
+            border-top: 1px solid rgba(0,0,0,0.1);
         }
         
         .social-links {
@@ -437,372 +256,137 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--primary-color);
             color: white;
             font-size: 1.3rem;
             transition: var(--transition);
         }
         
         .social-links a:hover {
-            background: var(--primary-color);
+            background: var(--secondary-color);
             transform: translateY(-5px);
         }
         
-        /* 响应式设计 */
-        @media (max-width: 992px) {
-            .hero h1 {
-                font-size: 3rem;
+        /* 响应式调整 */
+        @media (max-width: 767px) {
+            .about-text {
+                padding: 30px 20px;
             }
             
-            .about-content {
-                flex-direction: column;
+            .about-img-content h1 {
+                font-size: 1.8rem;
             }
             
-            .contact-container {
-                flex-direction: column;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
-            
-            .nav-links {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: white;
-                flex-direction: column;
-                align-items: center;
-                padding: 20px 0;
-                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-                transition: var(--transition);
-            }
-            
-            .nav-links.active {
-                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-            }
-            
-            .nav-links li {
-                margin: 15px 0;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            .btn-container {
-                display: flex;
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .btn-outline {
-                margin-left: 0;
-            }
-            
-            .projects-container {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .section-title h2 {
-                font-size: 2rem;
-            }
-            
-            .contact-form {
-                padding: 25px;
+            .about-text h2 {
+                font-size: 1.6rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- 导航栏 -->
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo">Dev<span>Portfolio</span></div>
-                <div class="menu-toggle" id="menuToggle">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul class="nav-links" id="navLinks">
-                    <li><a href="#home">首页</a></li>
-                    <li><a href="#about">关于我</a></li>
-                    <li><a href="#skills">技能</a></li>
-                    <li><a href="#projects">项目</a></li>
-                    <li><a href="#contact">联系</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <!-- 主区域 -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <h1>你好，我是<span>张明</span></h1>
-                <p>全栈开发工程师 | UI/UX设计师 | 技术爱好者</p>
-                <div class="btn-container">
-                    <a href="#projects" class="btn">查看作品</a>
-                    <a href="#contact" class="btn btn-outline">联系我</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 关于区域 -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>关于我</h2>
-            </div>
-            <div class="about-content">
+    <div class="container">
+        <header>
+            <div class="logo">关于我</div>
+            <div class="tagline">个人简介与详细信息</div>
+        </header>
+        
+        <div class="main-content">
+            <!-- 关于我卡片 -->
+            <div class="about-card">
                 <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="个人照片">
+                    <div class="about-img-content">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="个人照片">
+                        <h1>张明</h1>
+                        <div class="title">高级全栈开发工程师</div>
+                    </div>
                 </div>
+                
                 <div class="about-text">
-                    <h3>全栈开发者与技术爱好者</h3>
-                    <p>拥有5年Web开发经验，专注于创建高性能、用户友好的应用程序。我热爱解决复杂问题，并将创意转化为现实。</p>
+                    <h2>个人简介</h2>
+                    <p>我是一名拥有8年经验的全栈开发工程师，专注于创建高性能、用户友好的Web应用程序。我热爱解决复杂问题，并将创意转化为现实。</p>
                     <p>精通前端技术栈（React, Vue, JavaScript）和后端技术（Node.js, Python, SQL/NoSQL数据库）。致力于编写干净、可维护的代码，并遵循最佳实践。</p>
-                    <p>在业余时间，我喜欢参与开源项目、学习新技术，并为技术社区贡献自己的力量。</p>
-                    <a href="#" class="btn">下载简历</a>
+                    <p>在过去的职业生涯中，我参与了多个大型项目的开发，从电子商务平台到企业级管理系统，积累了丰富的实战经验。</p>
+                    <p>我相信技术的力量可以改变世界，因此我持续学习新技术并参与开源项目，为技术社区贡献自己的力量。</p>
+                    
+                    <div class="interests">
+                        <span class="interest">Web开发</span>
+                        <span class="interest">UI/UX设计</span>
+                        <span class="interest">云计算</span>
+                        <span class="interest">人工智能</span>
+                        <span class="interest">开源项目</span>
+                        <span class="interest">技术写作</span>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- 技能区域 -->
-    <section class="skills" id="skills">
-        <div class="container">
-            <div class="section-title">
-                <h2>专业技能</h2>
-            </div>
-            <div class="skills-container">
-                <div class="skill-card">
-                    <i class="fab fa-html5"></i>
-                    <h3>前端开发</h3>
-                    <p>HTML5, CSS3, JavaScript, React, Vue.js, Responsive Design, SASS, Bootstrap</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-server"></i>
-                    <h3>后端开发</h3>
-                    <p>Node.js, Express, Python, Django, RESTful APIs, GraphQL, Authentication</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-database"></i>
-                    <h3>数据库</h3>
-                    <p>MySQL, PostgreSQL, MongoDB, Redis, Firebase, ORM/ODM, 数据库设计</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-mobile-alt"></i>
-                    <h3>移动端开发</h3>
-                    <p>React Native, Progressive Web Apps, 响应式设计, 移动端优化</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-cloud"></i>
-                    <h3>DevOps & 云服务</h3>
-                    <p>AWS, Docker, CI/CD, Git, GitHub Actions, Linux, 服务器管理</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-paint-brush"></i>
-                    <h3>UI/UX 设计</h3>
-                    <p>Figma, Adobe XD, 用户研究, 原型设计, 交互设计, 设计系统</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 项目区域 -->
-    <section id="projects">
-        <div class="container">
-            <div class="section-title">
-                <h2>项目案例</h2>
-            </div>
-            <div class="projects-container">
-                <div class="project-card">
-                    <div class="project-img">
-                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="项目1">
+            
+            <!-- 详细信息网格 -->
+            <div class="details-grid">
+                <div class="detail-card">
+                    <h3><i class="fas fa-briefcase"></i> 工作经验</h3>
+                    <div class="detail-item">
+                        <h4>高级全栈工程师 - 科技先锋公司</h4>
+                        <p>2020年至今 | 北京</p>
+                        <p>负责公司核心产品的前后端架构设计与开发，带领5人团队完成多个重要项目。</p>
                     </div>
-                    <div class="project-info">
-                        <h3>电商平台</h3>
-                        <p>一个完整的电子商务解决方案，包含商品管理、购物车、支付集成和用户评价系统。</p>
-                        <div class="project-tags">
-                            <span class="tag">React</span>
-                            <span class="tag">Node.js</span>
-                            <span class="tag">MongoDB</span>
-                            <span class="tag">Stripe</span>
-                        </div>
-                        <a href="#" class="btn">查看详情</a>
+                    <div class="detail-item">
+                        <h4>Web开发工程师 - 创新科技有限公司</h4>
+                        <p>2017-2020 | 上海</p>
+                        <p>参与电商平台开发，优化系统性能，提高用户体验和转化率。</p>
+                    </div>
+                    <div class="detail-item">
+                        <h4>前端开发实习生 - 数字解决方案公司</h4>
+                        <p>2016-2017 | 杭州</p>
+                        <p>学习并应用前端技术，参与企业网站和内部管理系统的开发。</p>
                     </div>
                 </div>
-                <div class="project-card">
-                    <div class="project-img">
-                        <img src="https://images.unsplash.com/photo-1463171379579-3fdfb86d6285?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="项目2">
+                
+                <div class="detail-card">
+                    <h3><i class="fas fa-graduation-cap"></i> 教育背景</h3>
+                    <div class="detail-item">
+                        <h4>计算机科学硕士</h4>
+                        <p>2014-2016 | 浙江大学</p>
+                        <p>研究方向：分布式系统与云计算，GPA: 3.8/4.0</p>
                     </div>
-                    <div class="project-info">
-                        <h3>任务管理应用</h3>
-                        <p>一个协作任务管理工具，支持团队任务分配、进度跟踪和实时通知。</p>
-                        <div class="project-tags">
-                            <span class="tag">Vue.js</span>
-                            <span class="tag">Firebase</span>
-                            <span class="tag">Real-time</span>
-                            <span class="tag">PWA</span>
-                        </div>
-                        <a href="#" class="btn">查看详情</a>
+                    <div class="detail-item">
+                        <h4>软件工程学士</h4>
+                        <p>2010-2014 | 南京大学</p>
+                        <p>主修课程：算法设计、数据结构、Web开发、数据库系统</p>
                     </div>
                 </div>
-                <div class="project-card">
-                    <div class="project-img">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="项目3">
+                
+                <div class="detail-card">
+                    <h3><i class="fas fa-code"></i> 技术能力</h3>
+                    <div class="detail-item">
+                        <h4>前端技术</h4>
+                        <p>React, Vue.js, JavaScript, TypeScript, HTML5, CSS3/SASS, Bootstrap</p>
                     </div>
-                    <div class="project-info">
-                        <h3>健康追踪应用</h3>
-                        <p>一款帮助用户追踪健康指标、饮食和锻炼习惯的移动应用，包含数据可视化功能。</p>
-                        <div class="project-tags">
-                            <span class="tag">React Native</span>
-                            <span class="tag">Python</span>
-                            <span class="tag">数据分析</span>
-                            <span class="tag">Chart.js</span>
-                        </div>
-                        <a href="#" class="btn">查看详情</a>
+                    <div class="detail-item">
+                        <h4>后端技术</h4>
+                        <p>Node.js, Express, Python, Django, RESTful API, GraphQL</p>
+                    </div>
+                    <div class="detail-item">
+                        <h4>数据库</h4>
+                        <p>MySQL, PostgreSQL, MongoDB, Redis, Firebase</p>
+                    </div>
+                    <div class="detail-item">
+                        <h4>其他技能</h4>
+                        <p>Docker, AWS, Git, CI/CD, 性能优化, 敏捷开发</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- 联系区域 -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="section-title">
-                <h2>联系我</h2>
-            </div>
-            <div class="contact-container">
-                <div class="contact-info">
-                    <h3>让我们保持联系</h3>
-                    <div class="contact-detail">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <h4>邮箱</h4>
-                            <p>contact@example.com</p>
-                        </div>
-                    </div>
-                    <div class="contact-detail">
-                        <i class="fas fa-phone"></i>
-                        <div>
-                            <h4>电话</h4>
-                            <p>+86 138 8888 8888</p>
-                        </div>
-                    </div>
-                    <div class="contact-detail">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <h4>地址</h4>
-                            <p>北京市海淀区中关村科技园</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-form">
-                    <h3>发送消息</h3>
-                    <form>
-                        <div class="form-group">
-                            <label for="name">姓名</label>
-                            <input type="text" id="name" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">邮箱</label>
-                            <input type="email" id="email" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">主题</label>
-                            <input type="text" id="subject" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">消息</label>
-                            <textarea id="message" class="form-control" required></textarea>
-                        </div>
-                        <button type="submit" class="btn">发送消息</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 页脚 -->
-    <footer>
-        <div class="container">
+        
+        <footer>
             <div class="social-links">
                 <a href="#"><i class="fab fa-github"></i></a>
                 <a href="#"><i class="fab fa-linkedin-in"></i></a>
                 <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
                 <a href="#"><i class="fab fa-weixin"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
             </div>
-            <p>&copy; 2023 个人作品集. 保留所有权利</p>
+            <p>&copy; 2023 个人主页 | 专注于"关于我"</p>
             <p>托管于 GitHub Pages</p>
-        </div>
-    </footer>
-
-    <script>
-        // 移动端菜单切换
-        const menuToggle = document.getElementById('menuToggle');
-        const navLinks = document.getElementById('navLinks');
-        
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-        
-        // 平滑滚动
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                // 关闭移动端菜单
-                navLinks.classList.remove('active');
-                
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    window.scrollTo({
-                        top: target.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        
-        // 导航栏滚动效果
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.padding = '10px 0';
-                header.style.background = 'rgba(255, 255, 255, 0.98)';
-            } else {
-                header.style.padding = '20px 0';
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
-            }
-        });
-        
-        // 表单提交处理
-        const contactForm = document.querySelector('.contact-form form');
-        if (contactForm) {
-            contactForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                alert('感谢您的留言！我会尽快回复您。');
-                contactForm.reset();
-            });
-        }
-    </script>
+        </footer>
+    </div>
 </body>
 </html>
